@@ -3,7 +3,7 @@ import { LocationDescriptor, LocationState } from 'history';
 import styled from 'styled-components';
 import { StatefulContributor } from 'app/lmem/contributor';
 import Avatar from 'components/molecules/Avatar/Avatar';
-import UserName from 'components/atoms/UserName/UserName-compact';
+import UserName from 'components/atoms/UserName/UserNameCompact';
 import ContributorButton from './ContributorButton';
 import Link from 'components/atoms/Link';
 import ContributorWrapper from 'components/atoms/Contributor/ContributorWrapper';
