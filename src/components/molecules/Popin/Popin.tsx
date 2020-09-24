@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { BackgroundButton, Box, Paragraph } from '../../atoms';
+import { BackgroundButton, Box, Link, Paragraph } from '../../atoms';
 import CloseButton from '../../organisms/Notification/NotificationHeader/CloseButton';
 
 export type PopinSize = 'small' | 'large' | 'extralarge';
@@ -36,6 +36,16 @@ const PopinWrapper = styled.div`
   ${Paragraph} {
     padding-right: 20px;
     padding-left: 20px;
+  }
+
+  ${Link} {
+    color: ${props => props.theme.textColor};
+    text-decoration: underline;
+  }
+
+  ${BackgroundButton} {
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 `;
 
