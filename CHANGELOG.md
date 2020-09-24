@@ -1,3 +1,52 @@
+## [3.46.2](https://github.com/dis-moi/extension/compare/v3.46.1...v3.46.2) (2020-09-16)
+
+
+### Bug Fixes
+
+* Remove trailing slash on profiles origin ([6bf6c93](https://github.com/dis-moi/extension/commit/6bf6c93133562895fa22fb9ec48107946b82b433))
+
+## [3.46.1](https://github.com/dis-moi/extension/compare/v3.46.0...v3.46.1) (2020-09-15)
+
+
+### Bug Fixes
+
+* Setup profiles app proding and staging envs ([e540a84](https://github.com/dis-moi/extension/commit/e540a84fc8db1b1f1f98320cb94ff731c5d011ae))
+
+# [3.46.0](https://github.com/dis-moi/extension/compare/v3.45.1...v3.46.0) (2020-09-10)
+
+
+### Bug Fixes
+
+* **banner:** Fix default banner not showing up. ([c542725](https://github.com/dis-moi/extension/commit/c542725d2eda10e9f5375751f8fae9e718585fdd))
+* **FeaturedNotice:** resets max-width to improve display on mobile ([1e4c388](https://github.com/dis-moi/extension/commit/1e4c388fca766a0329ed711603f73e08eebc6756))
+* **firefox:** When navigating to another page wrong tab URl was transmited ([631d983](https://github.com/dis-moi/extension/commit/631d98377f2830f20b90644220f34d60e675e0c8))
+* **subscribe:** Fix subscription to a similar contributor. ([d48879b](https://github.com/dis-moi/extension/commit/d48879b51a67a7b10cfde8751e6f4dca574526a2))
+
+
+### Features
+
+* Consider ToS have been accepted when the extension is installed. ([571c406](https://github.com/dis-moi/extension/commit/571c4065a86bca3a7e7b68e10808946566ad160d))
+* **options:** Switch from options page to new profile external page. ([1915969](https://github.com/dis-moi/extension/commit/1915969414e6dd5d07a93d9b0ff3c7a14d11a282))
+
+## [3.45.1](https://github.com/dis-moi/extension/compare/v3.45.0...v3.45.1) (2020-09-07)
+
+
+### Bug Fixes
+
+* profiles crashes because featured notices does not have relayersIds ([876207d](https://github.com/dis-moi/extension/commit/876207d6c7583e86c3c7d7ce052cc770c745c902))
+
+# [3.45.0](https://github.com/dis-moi/extension/compare/v3.44.0...v3.45.0) (2020-09-04)
+
+
+### Bug Fixes
+
+* missing relayers in enhanced notice ([373700b](https://github.com/dis-moi/extension/commit/373700b9c762d666e6ca19e505ad37d9dc7f107c))
+
+
+### Features
+
+* **profiles:** add pagination to contributor’s notices list ([1267b19](https://github.com/dis-moi/extension/commit/1267b19668b6829546bab84b7ad6dee4493d5e8e))
+
 # [3.44.0](https://github.com/dis-moi/extension/compare/v3.43.1...v3.44.0) (2020-08-31)
 
 

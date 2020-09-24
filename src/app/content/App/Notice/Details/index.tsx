@@ -4,12 +4,12 @@ import withTitle from 'app/hocs/withTitle';
 import NoticeDetails, {
   NoticeDetailsMethodsProps
 } from 'components/organisms/NoticeDetails/NoticeDetails';
-import { StatefulNotice } from 'app/lmem/notice';
+import { StatefulNoticeWithContributor } from 'app/lmem/notice';
 import { Contributor } from 'app/lmem/contributor';
 import withConnect from './withConnect';
 
 export interface DetailsScreenDataProps {
-  notice?: StatefulNotice;
+  notice?: StatefulNoticeWithContributor;
   relayed?: boolean;
   relayer?: Contributor;
 }
@@ -28,7 +28,7 @@ export const Details = ({
   view,
   outboundLinkClicked,
   goBack,
-  clickContributor
+  onContributorClick
 }: DetailsScreenProps) => {
   if (notice) {
     return (
@@ -43,7 +43,7 @@ export const Details = ({
         view={view}
         outboundLinkClicked={outboundLinkClicked}
         goBack={goBack}
-        clickContributor={clickContributor}
+        onContributorClick={onContributorClick}
       />
     );
   }

@@ -1,7 +1,7 @@
 import React, { useState, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { ContributorId, StatefulContributor } from 'app/lmem/contributor';
-import { Notice } from 'app/lmem/notice';
+import { NoticeWithContributor } from 'app/lmem/notice';
 import Error from '../../Error';
 import {
   Box,
@@ -132,10 +132,12 @@ const SidebarBoxWithAction = styled(SidebarBox)`
 export interface ProfileProps {
   contributor?: StatefulContributor;
   noticesLoading?: boolean;
-  notices: Notice[];
-  featuredNotice?: Notice;
+  notices: NoticeWithContributor[];
+  featuredNotice?: NoticeWithContributor;
   subscribe: (contributorId: ContributorId) => void;
   unsubscribe: (contributorId: ContributorId) => void;
+  fetchMoreNotices: () => void | undefined;
+  fetchedAll: boolean;
   similarContributors: StatefulContributor[];
   contributors: StatefulContributor[];
   contributorsLoading?: boolean;
@@ -154,7 +156,9 @@ export const Profile = ({
   contributors,
   contributorsLoading,
   connected,
-  addToBrowser
+  addToBrowser,
+  fetchMoreNotices,
+  fetchedAll
 }: ProfileProps) => {
   const [notConnectedPopinState, setNotConnectedPopinState] = useState<
     NotConnectedPopinState
@@ -189,7 +193,7 @@ export const Profile = ({
     }
   };
 
-  const handleSeeNoticeInContext = (notice?: Notice) => () => {
+  const handleSeeNoticeInContext = (notice?: NoticeWithContributor) => () => {
     if (connected) {
       if (contributor?.subscribed) {
         if (notice && notice.exampleUrl) {
@@ -226,6 +230,8 @@ export const Profile = ({
           loading={noticesLoading}
           notices={notices}
           seeNoticeInContext={handleSeeNoticeInContext}
+          fetchMoreNotices={fetchMoreNotices}
+          fetchedAll={fetchedAll}
         />
       </MainCol>
 

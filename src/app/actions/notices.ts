@@ -2,7 +2,8 @@ import {
   getIgnoringReason,
   IgnoringReason,
   Notice,
-  StatefulNotice
+  StatefulNotice,
+  StatefulNoticeWithContributor
 } from 'app/lmem/notice';
 import Tab from 'app/lmem/tab';
 import {
@@ -14,28 +15,51 @@ import {
 } from '.';
 import { createErrorAction } from './helpers';
 import { ReceivedAction } from '../../webext/createMessageHandler';
+import { ContributorId } from '../lmem/contributor';
+
+export interface NoticesByContributorParameters {
+  contributor?: ContributorId;
+  limit?: number;
+  offset: number;
+}
+
+type FetchNoticesRequestParameters =
+  | NoticesByContributorParameters
+  | { url: string };
 
 export const FETCH_NOTICES_REQUEST = 'NOTICES/FETCH_REQUEST';
 export interface FetchNoticesRequestAction extends BaseAction {
   type: typeof FETCH_NOTICES_REQUEST;
-  payload: object;
+  payload: FetchNoticesRequestParameters;
 }
 export const fetchNoticesRequest = (
-  data: object = {}
+  parameters: FetchNoticesRequestParameters
 ): FetchNoticesRequestAction => ({
   type: FETCH_NOTICES_REQUEST,
-  payload: data
+  payload: parameters
 });
 
 export const NOTICES_FETCHED = 'NOTICES/FETCHED';
 export interface NoticesFetchedAction extends BaseAction {
   type: typeof NOTICES_FETCHED;
   payload: Notice[];
+  meta: ActionMeta & {
+    offset?: number;
+    offsetIndex?: ContributorId;
+    contributorId?: ContributorId;
+    fetchedAll?: boolean;
+  };
 }
 
-export const noticesFetched = (notices: Notice[]): NoticesFetchedAction => ({
+export const noticesFetched = (
+  notices: Notice[],
+  offset?: number,
+  contributorId?: ContributorId,
+  fetchedAll?: boolean
+): NoticesFetchedAction => ({
   type: NOTICES_FETCHED,
-  payload: notices
+  payload: notices,
+  meta: { offset, contributorId, offsetIndex: contributorId, fetchedAll }
 });
 
 export const FETCH_NOTICES_FAILURE = 'NOTICES/FETCH_FAILURE';
@@ -72,12 +96,12 @@ export const NOTICES_FOUND = 'NOTICES_FOUND';
 export interface NoticesFoundAction extends TabAction {
   type: typeof NOTICES_FOUND;
   payload: {
-    notices: StatefulNotice[];
+    notices: StatefulNoticeWithContributor[];
   };
 }
 
 export const noticesFound = (
-  notices: StatefulNotice[],
+  notices: StatefulNoticeWithContributor[],
   tab: Tab
 ): NoticesFoundAction => ({
   type: NOTICES_FOUND,

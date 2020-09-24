@@ -5,7 +5,7 @@ import { StatefulContributor } from 'app/lmem/contributor';
 import Avatar from 'components/molecules/Avatar/Avatar';
 import UserName from 'components/atoms/UserName/UserNameCompact';
 import ContributorButton from './ContributorButton';
-import Link from 'components/atoms/Link';
+import ContributorNameLink from './ContributorNameLink';
 import ContributorWrapper from 'components/atoms/Contributor/ContributorWrapper';
 
 const Wrapper = styled(ContributorWrapper)`
@@ -30,25 +30,35 @@ interface Props<S = LocationState> {
   onSubscribe: () => void;
   onUnsubscribe: () => void;
   to?: LocationDescriptor<S>;
+  onNameClick?: () => void;
   className?: string;
 }
 export const ContributorCompact = ({
   contributor,
   onSubscribe,
   onUnsubscribe,
+  onNameClick,
   to,
   className
 }: Props) => (
   <Wrapper className={className}>
-    <Avatar contributor={contributor} size="small" to={to} />
+    <Avatar
+      contributor={contributor}
+      size="small"
+      to={to}
+      onClick={onNameClick}
+    />
 
     <ContributorInfos>
       <UserName>
-        <Link to={to}>{contributor.name}</Link>
+        <ContributorNameLink onClick={onNameClick} to={to}>
+          {contributor.name}
+        </ContributorNameLink>
       </UserName>
     </ContributorInfos>
 
     <ContributorButton
+      loading={contributor.subscribing}
       subscribed={contributor.subscribed}
       onSubscribe={onSubscribe}
       onUnsubscribe={onUnsubscribe}

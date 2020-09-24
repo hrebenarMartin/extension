@@ -1,16 +1,16 @@
 import { SagaIterator } from 'redux-saga';
-import { takeLatest, select, put, call } from 'redux-saga/effects';
+import { takeLatest, select, put } from 'redux-saga/effects';
 import { captureException } from 'app/utils/sentry';
-import openOptions from 'webext/openOptionsTab';
+import { optionsRequested } from 'app/actions';
 import {
   INSTALLED,
   updateInstallationDetails,
   InstalledAction
 } from 'app/actions/install';
-import { isOnboardingRequired } from 'app/background/selectors';
 import { getInstallationDate } from 'app/background/selectors/installationDetails';
 import { InstallationDetails } from 'app/lmem/installation';
 import { version } from '../../../../package.json';
+
 export function* installedSaga({
   payload: { installedDetails }
 }: InstalledAction): SagaIterator {
@@ -33,10 +33,7 @@ export function* installedSaga({
 
     const { reason } = installedDetails;
     if (reason === 'install') {
-      const onboardingRequired = yield select(isOnboardingRequired);
-      if (onboardingRequired) {
-        yield call(openOptions, '/onboarding');
-      }
+      yield put(optionsRequested());
     }
   } catch (e) {
     captureException(e);
